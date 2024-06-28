@@ -102,6 +102,7 @@ public class TicTacToeScreen implements Screen {
         // Resize your screen here. The parameters represent the new window size.
 
         viewport.update(width, height);
+        stage.getViewport().update(width, height);
     }
 
     @Override

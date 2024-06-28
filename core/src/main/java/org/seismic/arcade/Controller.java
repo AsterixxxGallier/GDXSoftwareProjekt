@@ -38,8 +38,8 @@ public class Controller {
      * Shows the game selection screen.
      */
     public void playButtonPressed() {
-         showScreen("game selection");
-//        showScreen("tic tac toe");
+//         showScreen("game selection");
+        showScreen("tic tac toe");
     }
 
     public void symbolButtonPressed() {
