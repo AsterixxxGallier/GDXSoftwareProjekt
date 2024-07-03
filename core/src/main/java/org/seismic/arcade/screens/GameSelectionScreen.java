@@ -57,7 +57,7 @@ public class GameSelectionScreen implements Screen {
         stage.addActor(lunarlanderButton);
 
         float height = 80;
-        float aspectRatio = (float) tictactoeButton.getWidth() / tictactoeButton.getHeight();
+        float aspectRatio = tictactoeButton.getWidth() / tictactoeButton.getHeight();
         tictactoeButton.setHeight(height);
         tictactoeButton.setWidth(height * aspectRatio);
 
@@ -129,6 +129,7 @@ public class GameSelectionScreen implements Screen {
     @Override
     public void dispose() {
         // Destroy screen's assets here.
+
         batch.dispose();
         lunarlanderButtonTexture.dispose();
         tictactoeButtonTexture.dispose();
