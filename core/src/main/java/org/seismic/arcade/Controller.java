@@ -19,7 +19,11 @@ public class Controller {
 
         if (screen.equals("tic tac toe")) {
             // initialize tic tac toe state
-            model.symbol = "x";
+            model.symbols = new String[9];
+            for (int i = 0; i < 9; i++) {
+                model.symbols[i] = "empty";
+            }
+            model.ticTacToePlayerNow = "x";
         }
 
         view.showScreen(screen);
@@ -53,18 +57,27 @@ public class Controller {
         showScreen("turme von hanoi");
     }
 
-    public void symbolButtonPressed() {
-        switch (model.symbol) {
-            case "x":
-                model.symbol = "o";
-                break;
-            case "o":
-                model.symbol = "x";
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + model.symbol);
+    public void symbolButtonPressed(int i) {
+        if (!model.symbols[i].equals("empty")) {
+            System.err.println("PLAYER EVIL");
+            return;
         }
 
-        System.out.println(model.symbol);
+        model.symbols[i] = model.ticTacToePlayerNow;
+
+        System.out.print(i);
+        System.out.print(": ");
+        System.out.println(model.symbols[i]);
+
+        switch (model.ticTacToePlayerNow) {
+            case "x":
+                model.ticTacToePlayerNow = "o";
+                break;
+            case "o":
+                model.ticTacToePlayerNow = "x";
+                break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + model.ticTacToePlayerNow);
+        }
     }
 }

@@ -5,5 +5,7 @@ package org.seismic.arcade;
  */
 public class Model {
     public String currentScreen;
-    public String symbol;
+
+    public String[] symbols;
+    public String ticTacToePlayerNow;
 }

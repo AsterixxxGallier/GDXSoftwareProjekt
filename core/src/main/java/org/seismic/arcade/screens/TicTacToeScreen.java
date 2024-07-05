@@ -24,13 +24,15 @@ public class TicTacToeScreen implements Screen {
     Texture backgroundTexture;
     Texture xTexture;
     Texture oTexture;
+    Texture emptyTexture;
 
     SpriteBatch batch;
     Camera camera;
     Viewport viewport;
     Stage stage;
 
-    Button symbolButton;
+    // 0 = unten links, 1 = unten mitte, ...
+    Button[] symbolButtons;
 
     public TicTacToeScreen(Controller controller) {
         this.controller = controller;
@@ -43,6 +45,7 @@ public class TicTacToeScreen implements Screen {
         backgroundTexture = new Texture("tictactoe.jpg");
         xTexture = new Texture("x.jpg");
         oTexture = new Texture("o.jpg");
+        emptyTexture = new Texture("empty.jpg");
 
         batch = new SpriteBatch();
         camera = new PerspectiveCamera();
@@ -51,23 +54,36 @@ public class TicTacToeScreen implements Screen {
 
         Gdx.input.setInputProcessor(stage);
 
-        symbolButton = new Button(new TextureRegionDrawable(xTexture));
-        stage.addActor(symbolButton);
+        symbolButtons = new Button[9];
 
-        float sideLength = 126f;
-        symbolButton.setHeight(sideLength);
-        symbolButton.setWidth(sideLength);
+        float bottom_right_x = 196f;
+        float bottom_right_y = 63f;
 
-        symbolButton.setPosition(324, 65, Align.center);
+        for (int i = 0; i < 9; i++) {
+            int x = i % 3;
+            int y = i / 3;
 
-        symbolButton.addListener(new ClickListener() {
-            @Override
-            public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Clicked on symbol button");
+            symbolButtons[i] = new Button(new TextureRegionDrawable(emptyTexture));
+            stage.addActor(symbolButtons[i]);
 
-                controller.symbolButtonPressed();
-            }
-        });
+            float sideLength = 126f;
+            symbolButtons[i].setHeight(sideLength);
+            symbolButtons[i].setWidth(sideLength);
+
+            float withPadding = 130f;
+
+            symbolButtons[i].setPosition(bottom_right_x + withPadding * x, bottom_right_y + withPadding * y, Align.center);
+
+            int finalI = i;
+            symbolButtons[i].addListener(new ClickListener() {
+                @Override
+                public void clicked(InputEvent event, float x, float y) {
+                    System.out.println("Clicked on symbol button");
+
+                    controller.symbolButtonPressed(finalI);
+                }
+            });
+        }
     }
 
     @Override
@@ -83,15 +99,20 @@ public class TicTacToeScreen implements Screen {
         batch.draw(backgroundTexture, 130f, 5f, width, height);
         batch.end();
 
-        switch (controller.model.symbol) {
-            case "x":
-                symbolButton.getStyle().up = new TextureRegionDrawable(xTexture);
-                break;
-            case "o":
-                symbolButton.getStyle().up = new TextureRegionDrawable(oTexture);
-                break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + controller.model.symbol);
+        for (int i = 0; i < 9; i++) {
+            switch (controller.model.symbols[i]) {
+                case "x":
+                    symbolButtons[i].getStyle().up = new TextureRegionDrawable(xTexture);
+                    break;
+                case "o":
+                    symbolButtons[i].getStyle().up = new TextureRegionDrawable(oTexture);
+                    break;
+                case "empty":
+                    symbolButtons[i].getStyle().up = new TextureRegionDrawable(emptyTexture);
+                    break;
+                default:
+                    throw new IllegalStateException("Unexpected value: " + controller.model.symbols[i]);
+            }
         }
 
         stage.draw();
