@@ -38,20 +38,19 @@ public class Controller {
      * Shows the game selection screen.
      */
     public void playButtonPressed() {
-//         showScreen("game selection");
-        showScreen("GameSelectionScreen");
+        showScreen("game selection");
     }
 
     public void tictactoeButtonPressed() {
-        showScreen ("TicTacToeScreen");
+        showScreen ("tic tac toe");
     }
 
     public void lunarlanderButtonPressed(){
-        showScreen ("LunarLanderScreen");
+        showScreen ("lunar lander");
     }
 
     public void turmevonhanoiButtonPressed () {
-        showScreen("Türme von Hanoi Screen");
+        showScreen("turme von hanoi");
     }
 
     public void symbolButtonPressed() {

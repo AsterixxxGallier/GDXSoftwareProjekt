@@ -44,7 +44,7 @@ public class GameSelectionScreen implements Screen {
         stage = new Stage();
         Gdx.input.setInputProcessor(stage);
 
-        tictactoeButtonTexture = new Texture("tictactoe.jpg");
+        tictactoeButtonTexture = new Texture("tictactoe.png");
         turmevonhanoiButtonTexture = new Texture("Türme von Hanoi.png");
         lunarlanderButtonTexture = new Texture("lunarlander.png");
 
@@ -56,12 +56,32 @@ public class GameSelectionScreen implements Screen {
         Button lunarlanderButton = new Button(new TextureRegionDrawable(lunarlanderButtonTexture));
         stage.addActor(lunarlanderButton);
 
-        float height = 80;
-        float aspectRatio = tictactoeButton.getWidth() / tictactoeButton.getHeight();
-        tictactoeButton.setHeight(height);
-        tictactoeButton.setWidth(height * aspectRatio);
+        {
+            float height = 120;
+            float aspectRatio = tictactoeButton.getWidth() / tictactoeButton.getHeight();
+            tictactoeButton.setHeight(height);
+            tictactoeButton.setWidth(height * aspectRatio);
 
-        tictactoeButton.setPosition(300, 100, Align.center);
+            tictactoeButton.setPosition(125, 250, Align.center);
+        }
+
+        {
+            float height = 120;
+            float aspectRatio = turmevonhanoiButton.getWidth() / turmevonhanoiButton.getHeight();
+            turmevonhanoiButton.setHeight(height);
+            turmevonhanoiButton.setWidth(height * aspectRatio);
+
+            turmevonhanoiButton.setPosition(325, 250, Align.center);
+        }
+
+        {
+            float height = 120;
+            float aspectRatio = lunarlanderButton.getWidth() / lunarlanderButton.getHeight();
+            lunarlanderButton.setHeight(height);
+            lunarlanderButton.setWidth(height * aspectRatio);
+
+            lunarlanderButton.setPosition(525, 250, Align.center);
+        }
 
         tictactoeButton.addListener(new ClickListener() {
             @Override
@@ -86,22 +106,9 @@ public class GameSelectionScreen implements Screen {
     }
     public void render (float delta) {
         // Draw your screen here. "delta" is the time since last render in seconds.
-        ScreenUtils.clear(Color.WHITE);
-
-        batch.begin();
-        float width = 400;
-        float aspectRatio = 948f / 547f;
-        float height = width / aspectRatio;
-        batch.draw(tictactoeButtonTexture, 100f, 160f, width, height);
-        batch.draw(lunarlanderButtonTexture, 200f, 80f, width, height);
-        batch.draw(turmevonhanoiButtonTexture, 200f, 80f, width, height);
-
-        batch.end();
-
+        ScreenUtils.clear(new Color(0xFFEEAAFF));
 
         stage.draw();
-
-        ScreenUtils.clear(new Color(0xFFEEAAFF));
     }
 
     @Override
