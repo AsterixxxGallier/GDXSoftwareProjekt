@@ -27,7 +27,7 @@ public class GameSelectionScreen implements Screen {
     SpriteBatch batch;
 
     Texture tictactoeButtonTexture;
-    Texture turmevonhanoiButtonTexture;
+    Texture towersOfHanoiButtonTexture;
     Texture lunarlanderButtonTexture;
 
     public GameSelectionScreen(Controller controller) {
@@ -45,14 +45,14 @@ public class GameSelectionScreen implements Screen {
         Gdx.input.setInputProcessor(stage);
 
         tictactoeButtonTexture = new Texture("tictactoe.png");
-        turmevonhanoiButtonTexture = new Texture("Türme von Hanoi.png");
+        towersOfHanoiButtonTexture = new Texture("Türme von Hanoi.png");
         lunarlanderButtonTexture = new Texture("lunarlander.png");
 
 
         Button tictactoeButton = new Button(new TextureRegionDrawable(tictactoeButtonTexture));
         stage.addActor(tictactoeButton);
-        Button turmevonhanoiButton = new Button(new TextureRegionDrawable(turmevonhanoiButtonTexture));
-        stage.addActor(turmevonhanoiButton);
+        Button towersOfHanoiButton = new Button(new TextureRegionDrawable(towersOfHanoiButtonTexture));
+        stage.addActor(towersOfHanoiButton);
         Button lunarlanderButton = new Button(new TextureRegionDrawable(lunarlanderButtonTexture));
         stage.addActor(lunarlanderButton);
 
@@ -67,11 +67,11 @@ public class GameSelectionScreen implements Screen {
 
         {
             float height = 120;
-            float aspectRatio = turmevonhanoiButton.getWidth() / turmevonhanoiButton.getHeight();
-            turmevonhanoiButton.setHeight(height);
-            turmevonhanoiButton.setWidth(height * aspectRatio);
+            float aspectRatio = towersOfHanoiButton.getWidth() / towersOfHanoiButton.getHeight();
+            towersOfHanoiButton.setHeight(height);
+            towersOfHanoiButton.setWidth(height * aspectRatio);
 
-            turmevonhanoiButton.setPosition(325, 250, Align.center);
+            towersOfHanoiButton.setPosition(325, 250, Align.center);
         }
 
         {
@@ -86,7 +86,7 @@ public class GameSelectionScreen implements Screen {
         tictactoeButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Clicked on tictactoebutton");
+                System.out.println("Clicked on tic tac toe button");
 
                 controller.tictactoeButtonPressed();
             }
@@ -96,9 +96,19 @@ public class GameSelectionScreen implements Screen {
         lunarlanderButton.addListener(new ClickListener() {
             @Override
             public void clicked(InputEvent event, float x, float y) {
-                System.out.println("Clicked on lunarlanderbutton");
+                System.out.println("Clicked on lunar lander button");
 
                 controller.lunarlanderButtonPressed();
+            }
+
+        });
+
+        towersOfHanoiButton.addListener(new ClickListener() {
+            @Override
+            public void clicked(InputEvent event, float x, float y) {
+                System.out.println("Clicked on towers of hanoi button");
+
+                controller.towersOfHanoiButtonPressed();
             }
 
         });
@@ -140,7 +150,8 @@ public class GameSelectionScreen implements Screen {
         batch.dispose();
         lunarlanderButtonTexture.dispose();
         tictactoeButtonTexture.dispose();
-        tictactoeButtonTexture.dispose();
+        towersOfHanoiButtonTexture.dispose();
+        stage.dispose();
     }
 
 }

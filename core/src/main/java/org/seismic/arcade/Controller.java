@@ -1,5 +1,7 @@
 package org.seismic.arcade;
 
+import java.util.Stack;
+
 import static java.lang.Math.PI;
 import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.math.MathUtils;
@@ -43,6 +45,22 @@ public class Controller {
             model.ticTacToePlayerNow = "x";
         }
 
+        if (screen.equals("towers of hanoi")) {
+            // initialize towers of hanoi state
+            //noinspection unchecked
+            model.towers = new Stack[3];
+            model.towers[0] = new Stack<>();
+            model.towers[0].push(0);
+            model.towers[0].push(1);
+            model.towers[0].push(2);
+            model.towers[1] = new Stack<>();
+            model.towers[2] = new Stack<>();
+            model.selectedTower = -1;
+            model.moves = 0;
+            model.wonTowersOfHanoi = false;
+            model.secondsSinceWon = 0;
+        }
+
         view.showScreen(screen);
     }
 
@@ -70,8 +88,12 @@ public class Controller {
         showScreen ("lunar lander");
     }
 
-    public void turmevonhanoiButtonPressed () {
-        showScreen("turme von hanoi");
+    public void towersOfHanoiButtonPressed() {
+        showScreen("towers of hanoi");
+    }
+
+    public void towersOfHanoiDone() {
+        showScreen("game selection");
     }
 
     public void symbolButtonPressed(int i) {
@@ -151,4 +173,43 @@ public class Controller {
     }
 
 
+
+    public void towersOfHanoiNumberPressed(int tower) {
+        if (tower > 2 || 0 > tower) {
+            return;
+        }
+        if (model.wonTowersOfHanoi) {
+            return;
+        }
+        if (model.selectedTower == -1) {
+            if (!model.towers[tower].isEmpty()) {
+                model.selectedTower = tower;
+            }
+        } else if (model.selectedTower == tower) {
+            deselectTower();
+        } else {
+            movePlate(model.selectedTower, tower);
+            deselectTower();
+        }
+        if (model.towers[2].size() == 3) {
+            model.wonTowersOfHanoi = true;
+        }
+    }
+
+    private void deselectTower() {
+        model.selectedTower = -1;
+    }
+
+    private void movePlate(int from, int to) {
+        Stack<Integer> fromTower = model.towers[from];
+        Stack<Integer> toTower = model.towers[to];
+        if (fromTower.isEmpty()) {
+            return;
+        }
+        if (!toTower.isEmpty() && toTower.peek() > fromTower.peek()) {
+            return;
+        }
+        toTower.push(fromTower.pop());
+        model.moves++;
+    }
 }

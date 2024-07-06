@@ -5,6 +5,8 @@ import com.badlogic.gdx.math.Vector2;
 
 import static java.lang.Math.PI;
 
+import java.util.Stack;
+
 /**
  * Model class for the MVC architecture.
  */
@@ -26,4 +28,10 @@ public class Model {
     final float PI = MathUtils.PI;
     final float BOOST = 10.0f;
     final Vector2 gravity = new Vector2(0, -0.1f);
+
+    public Stack<Integer>[] towers;
+    public int selectedTower;
+    public int moves;
+    public boolean wonTowersOfHanoi;
+    public float secondsSinceWon;
 }
