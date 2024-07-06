@@ -29,7 +29,7 @@ public class Controller {
             model.force = new Vector2(0, 0);
             model.boost = false;
             model.r = 14;
-            model.angle = -PI / 2;
+            model.angle = (float) (-PI / 2);
             model.landed = false;
             model.crashed = false;
             float angle2 = MathUtils.map(MathUtils.random(1, 100), 1, 100, -0.6f, 0.6f);
@@ -120,7 +120,6 @@ public class Controller {
         }
     }
 
-
     public boolean isTooFast(){
         return model.vel.y > 2;
     }
@@ -156,7 +155,7 @@ public class Controller {
 
     public void calc() {
         if (model.boost) {
-            model.force.setAngleRad((float) model.angle);
+            model.force.setAngleRad (model.angle);
             model.force.scl(model.BOOST);
             model.vel.add(model.force);
             model.boost = false;
@@ -172,7 +171,17 @@ public class Controller {
         model.pos = edges(model.pos, model.r);
     }
 
+    public void moveRocketRight () {
+        model.angle -= 0.1;
+    }
 
+    public void moveRocketLeft () {
+        model.angle += 0.1;
+    }
+
+    public void moveRocketUp () {
+        model.boost = true;
+    }
 
     public void towersOfHanoiNumberPressed(int tower) {
         if (tower > 2 || 0 > tower) {

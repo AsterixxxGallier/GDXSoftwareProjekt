@@ -22,9 +22,7 @@ public class LunarLanderScreen implements Screen {
     Stage stage;
 
     Texture LunarLanderBackgroundTexture;
-// jetzt fehlen nur noch die tasten
-    // so ziemlich
-    // führ's mal aus, ich will's sehen
+
     public LunarLanderScreen(Controller controller) {
         this.controller = controller;
     }
@@ -53,15 +51,10 @@ public class LunarLanderScreen implements Screen {
         Gdx.gl.glClearColor(1, 1, 1, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
+
         batch.begin();
         batch.draw(LunarLanderBackgroundTexture, 0, 0);
         batch.end();
-
-        //platform
-        shape.begin(ShapeRenderer.ShapeType.Filled);
-        shape.setColor(Color.GRAY);
-        shape.rect(100, 0, 150, 20);
-        shape.end();
 
         shape.begin(ShapeRenderer.ShapeType.Filled);
         shape.identity();
@@ -85,9 +78,18 @@ public class LunarLanderScreen implements Screen {
         shape.end();
 
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-            System.out.println("Left arrow key pressed");
+            controller.moveRocketLeft();
+            controller.calc();
+        }
+        if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+           controller.moveRocketRight();
+           controller.calc();
         }
 
+        if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+            controller.moveRocketUp();
+            controller.calc();
+        }
 
     }
 

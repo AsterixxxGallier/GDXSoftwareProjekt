@@ -20,7 +20,7 @@ public class Model {
     public Vector2 vel;
     public Vector2 force;
     public int r;
-    public double angle;
+    public float angle;
     public boolean boost;
     public boolean landed;
     public boolean crashed;
