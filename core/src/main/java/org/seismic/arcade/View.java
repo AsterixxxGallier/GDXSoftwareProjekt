@@ -2,10 +2,7 @@ package org.seismic.arcade;
 
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Screen;
-import org.seismic.arcade.screens.GameSelectionScreen;
-import org.seismic.arcade.screens.LunarLanderScreen;
-import org.seismic.arcade.screens.StartScreen;
-import org.seismic.arcade.screens.TicTacToeScreen;
+import org.seismic.arcade.screens.*;
 
 /**
  * View class for the MVC architecture.
@@ -19,6 +16,7 @@ public class View {
     Screen gameSelectionScreen;
     Screen ticTacToeScreen;
     Screen lunarLanderScreen;
+    Screen towersOfHanoiScreen;
 
     public View(Controller controller) {
         this.controller = controller;
@@ -28,6 +26,7 @@ public class View {
         gameSelectionScreen = new GameSelectionScreen(controller);
         ticTacToeScreen = new TicTacToeScreen(controller);
         lunarLanderScreen = new LunarLanderScreen(controller);
+        towersOfHanoiScreen = new TowersOfHanoiScreen(controller);
     }
 
     /**
@@ -46,6 +45,9 @@ public class View {
                 break;
             case "lunar lander":
                 game.setScreen(lunarLanderScreen);
+                break;
+            case "towers of hanoi":
+                game.setScreen(towersOfHanoiScreen);
                 break;
             default:
                 throw new IllegalStateException("Unexpected value: " + screen);
